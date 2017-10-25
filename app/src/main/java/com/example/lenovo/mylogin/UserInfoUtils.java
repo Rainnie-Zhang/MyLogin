@@ -1,5 +1,7 @@
 package com.example.lenovo.mylogin;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,10 +15,11 @@ import java.util.Map;
  */
 
 public class UserInfoUtils {
-    public static boolean saveInfo(String username,String pwd){
+    public static boolean saveInfo(Context context,String username, String pwd){
         try {
             String result=username+"##"+pwd;
-            File file=new File("C:\\");
+            String path=context.getFilesDir().getPath();
+            File file=new File(path,"info.txt");
             FileOutputStream fos=new FileOutputStream(file);
             fos.write(result.getBytes());
             fos.close();
@@ -28,10 +31,11 @@ public class UserInfoUtils {
         }
     }
 
-    public static Map<String,String> readInfo(){
+    public static Map<String,String> readInfo(Context context){
         try {
             Map<String,String> maps= new HashMap<String,String>();
-            File file=new File("C:\\");
+            String path=context.getFilesDir().getPath();
+            File file=new File(path,"info.txt");
             FileInputStream fis=new FileInputStream(file);
             BufferedReader buf=new BufferedReader(new InputStreamReader(fis));
             String content=buf.readLine();

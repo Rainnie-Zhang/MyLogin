@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         et_username=(EditText)findViewById(R.id.et_username);
         et_password=(EditText)findViewById(R.id.et_passward);
         check=(CheckBox)findViewById(R.id.check);
-        Map<String,String> maps=UserInfoUtils.readInfo();
+        Map<String,String> maps=UserInfoUtils.readInfo(MainActivity.this);
         if(maps!=null){
             String name=maps.get("name");
             String pwd=maps.get("pwd");
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             System.out.println("连接服务器  进行登录 等我们讲到 第四天 网络 编程 在说");
             if(check.isChecked()){
-                boolean result = UserInfoUtils.saveInfo(name, pwd);
+                boolean result = UserInfoUtils.saveInfo(MainActivity.this,name, pwd);
                 if (result) {
                     Toast.makeText(MainActivity.this, "保存成功",Toast.LENGTH_SHORT).show();
 
